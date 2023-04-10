@@ -33,8 +33,16 @@ jobs:
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml -f app/pom.xml -DskipTests=false || true
       env:
         GITHUB_TOKEN: ${{ github.token }}
-    - name: Azure WebApp
-      uses: Azure/webapps-deploy@v2
+    - name: Login via Azure CLI
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Build and deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: <your-app-name>
+        slot-name: <your-slot-name> # optional
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
 
         
     
