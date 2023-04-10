@@ -33,6 +33,8 @@ jobs:
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml -f app/pom.xml -DskipTests=false || true
       env:
         GITHUB_TOKEN: ${{ github.token }}
+    - name: Install Azure CLI
+      uses: azure/setup-azure-cli@v1
     - name: Login via Azure CLI
       uses: azure/login@v1
       with:
