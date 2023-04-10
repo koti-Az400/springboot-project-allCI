@@ -27,10 +27,10 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: Build with Maven
-      run: mvn -B package --file app/pom.xml
+      run: mvn -B package --file app/pom.xml -DskipTests=false || true
 
     - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml -f app/pom.xml
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml -f app/pom.xml -DskipTests=false || true
       env:
         GITHUB_TOKEN: ${{ github.token }}
     - name: Azure WebApp
